@@ -41,6 +41,24 @@ public:
     }
     return temp;
   }
+  void set_move(int n) {
+    char player;
+    if (turns %2 == 0) {
+      player = 'o';
+    } else {
+      player = 'x';
+    }
+    for (int i = 5; i >= 0; i--) {
+      if (board[i][n] == '.') {
+        board[i][n] = player;
+        if (i == 0) {
+          states[n] = true;
+        }
+        break;
+      }
+    }
+
+  }
   void player1() {
     turns++; cout << "Turn: " << turns << " , Player One to move!\n";
     // Check if its a number between 1-7
@@ -57,15 +75,7 @@ public:
       }
     }
     n--;
-    for (int i = 5; i >= 0; i--) {
-      if (board[i][n] == '.') {
-        board[i][n] = 'x';
-        if (i == 0) {
-          states[n] = true;
-        }
-        break;
-      }
-    }
+    set_move(n);
     draw();
     check_for_winner();
     game_state();
@@ -87,15 +97,7 @@ public:
       }
     }
     n--;
-    for (int i = 5; i >= 0; i--) {
-      if (board[i][n] == '.') {
-        board[i][n] = 'o';
-        if (i == 0) {
-          states[n] = true;
-        }
-        break;
-      }
-    }
+    set_move(n);
     draw();
     check_for_winner();
     game_state();
@@ -116,15 +118,7 @@ public:
     }
     cout << "Computer chose: " << n << "!\n";
     n--;
-    for (int i = 5; i >= 0; i--) {
-      if (board[i][n] == '.') {
-        board[i][n] = 'o';
-        if (i == 0) {
-          states[n] = true;
-        }
-        break;
-      }
-    }
+    set_move(n);
     draw();
     check_for_winner();
     game_state();
